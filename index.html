@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Content Saver - Save Web Passages with Context</title>
+  <meta name="description"
+    content="A fast, local-first Chrome extension to capture web passages with personal context into a searchable Obsidian Neobrutalist dashboard with Firebase sync.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+</head>
+
+<body>
+
+  <!-- Cool Neobrutalist Preloader / Loading Screen -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-backdrop"></div>
+    <div class="preloader-card">
+      <div class="preloader-header">
+        <div class="preloader-brand">
+          <div class="preloader-diamond">◆</div>
+          <span class="preloader-title">WEB SAVER // INITIALIZING</span>
+        </div>
+        <span class="preloader-status-tag">SYS_BOOT</span>
+      </div>
+
+      <div class="preloader-body">
+        <div class="telemetry-terminal">
+          <div id="terminal-lines" class="terminal-lines">
+            <div class="term-line text-cyan">&gt; INITIALIZING CORE MODULES...</div>
+          </div>
+        </div>
+
+        <div class="progress-container">
+          <div class="progress-info">
+            <span class="progress-label">BOOT_PROGRESS</span>
+            <span id="progress-percent" class="progress-percent">0%</span>
+          </div>
+          <div class="progress-track">
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preloader-footer">
+        <span class="footer-hint">CLICK OR PRESS KEY TO SKIP ↵</span>
+        <span class="version-tag">V1.0 ONLINE</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-link">
+        <div class="diamond-badge">◆</div>
+        <div class="brand-title">
+          <span class="brand-main">WEB SAVER</span>
+          <span class="brand-tag">v1.0 ONLINE</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#features" class="nav-anchor">FEATURES</a>
+        <a href="#how-it-works" class="nav-anchor">HOW TO INSTALL</a>
+        <a href="#interactive-demo" class="nav-anchor">LIVE DEMO</a>
+        <button id="nav-contact-btn" class="nav-anchor contact-btn" type="button">CONTACT ME</button>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="web-content-saver.zip" download="web-content-saver.zip" id="nav-download-btn"
+          class="btn btn-primary btn-nav">
+          <span class="btn-icon">↓</span> DOWNLOAD EXTENSION
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>MANIFEST V3 • LOCAL-FIRST • FIREBASE SYNC</span>
+      </div>
+
+      <h1 class="hero-title">
+        STOP LOSING <span class="highlight-yellow">WHY</span> YOU BOOKMARKED A PAGE.
+      </h1>
+
+      <p class="hero-subtitle">
+        Bookmarks save <em>where</em> a page is, but not <em>why it mattered</em>. Web Content Saver captures your
+        highlighted quotes + required 1–2 line personal context note into a searchable, offline-ready Obsidian
+        dashboard.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="web-content-saver.zip" download="web-content-saver.zip" id="hero-download-btn"
+          class="btn btn-primary btn-hero">
+          <span class="btn-icon">↓</span> DOWNLOAD EXTENSION (.ZIP)
+        </a>
+        <a href="#interactive-demo" class="btn btn-secondary btn-hero">
+          ⚡ TRY INTERACTIVE DEMO
+        </a>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="metrics-strip">
+        <div class="metric-box">
+          <span class="metric-num val-yellow">100%</span>
+          <span class="metric-label">LOCAL &amp; PRIVATE</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-num val-pink">&lt;10ms</span>
+          <span class="metric-label">INSTANT SEARCH</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-num val-cyan">Alt+Shift+S</span>
+          <span class="metric-label">HOTKEY CAPTURE</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-num val-mint">FIREBASE</span>
+          <span class="metric-label">CLOUD SYNC READY</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Demo / Live Preview Sandbox -->
+  <section id="interactive-demo" class="section-container demo-section">
+    <div class="section-header">
+      <div class="section-tag val-pink">INTERACTIVE PLAYGROUND</div>
+      <h2 class="section-title">TEST DRIVE THE CAPTURE FLOW</h2>
+      <p class="section-desc">Try saving a simulated web note below and watch it appear in the live dashboard in real
+        time!</p>
+    </div>
+
+    <div class="demo-split-grid">
+      <!-- Left: Interactive Extension Popup Simulation -->
+      <div class="demo-card popup-sim">
+        <div class="sim-header">
+          <div class="sim-pill">◆ POPUP SIMULATOR</div>
+          <span class="shortcut-tag">Alt+Shift+S</span>
+        </div>
+
+        <form id="demo-save-form" class="sim-form">
+          <div class="sim-meta">
+            <span class="sim-label">SIMULATED TAB</span>
+            <div class="sim-page-title">Deep Dive: Manifest V3 Service Workers &amp; IndexedDB</div>
+            <div class="sim-url">https://developer.chrome.com/docs/extensions/mv3</div>
+          </div>
+
+          <div class="sim-group">
+            <label class="sim-field-label">" CAPTURED PASSAGE (OPTIONAL)</label>
+            <div class="sim-quote-box">
+              "Service workers terminate when idle. Always open IndexedDB connections per transaction to prevent stall."
+            </div>
+          </div>
+
+          <div class="sim-group">
+            <label for="demo-context-input" class="sim-field-label">
+              WHY ARE YOU SAVING THIS? <span class="req">*</span>
+            </label>
+            <textarea id="demo-context-input" class="sim-textarea" rows="3"
+              placeholder="e.g. Critical architecture note for background.js lifecycle..."
+              required>Essential pattern for our background message listener restart.</textarea>
+          </div>
+
+          <button type="submit" id="demo-submit-btn" class="btn btn-primary full-width">
+            ⚡ Save Content to Dashboard
+          </button>
+        </form>
+      </div>
+
+      <!-- Right: Live Dashboard Feed Preview -->
+      <div class="demo-card dashboard-sim">
+        <div class="sim-header">
+          <div class="sim-pill val-cyan">■ DASHBOARD FEED (LIVE)</div>
+          <div class="feed-count"><span id="demo-feed-count">2</span> SAVES</div>
+        </div>
+
+        <div class="demo-search-box">
+          <input type="text" id="demo-search-input" class="demo-search-input" placeholder="Search preview cards...">
+        </div>
+
+        <div id="demo-cards-feed" class="demo-feed-scroll">
+          <!-- Dynamic cards populated by landing.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step-by-Step Installation & Usage Guide -->
+  <section id="how-it-works" class="section-container steps-section">
+    <div class="section-header">
+      <div class="section-tag val-yellow">QUICK START GUIDE</div>
+      <h2 class="section-title">HOW TO INSTALL IN 60 SECONDS</h2>
+      <p class="section-desc">No build tools or command line required. Pure vanilla JavaScript loaded directly into
+        Chrome.</p>
+    </div>
+
+    <div class="steps-grid">
+      <!-- Step 1 -->
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Download &amp; Unzip</h3>
+        <p class="step-text">
+          Click the <strong>Download Extension</strong> button to get <code
+            class="code-pill">web-content-saver.zip</code>, then extract it to a folder on your computer.
+        </p>
+        <a href="web-content-saver.zip" download="web-content-saver.zip" class="btn btn-secondary btn-small">
+          ↓ Download .ZIP
+        </a>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Open Chrome Extensions</h3>
+        <p class="step-text">
+          In Google Chrome, navigate to <code class="code-pill">chrome://extensions</code> and toggle on
+          <strong>Developer mode</strong> in the top-right corner.
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Click "Load unpacked"</h3>
+        <p class="step-text">
+          Click the <strong>Load unpacked</strong> button on the top-left and select the extracted <code
+            class="code-pill">bootcamp4</code> folder.
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Pin &amp; Save Anywhere</h3>
+        <p class="step-text">
+          Pin the extension to your toolbar. On any website, select text and press <kbd class="kbd">Alt+Shift+S</kbd> to
+          save notes with personal context!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid Section -->
+  <section id="features" class="section-container features-section">
+    <div class="section-header">
+      <div class="section-tag val-mint">FEATURE HIGHLIGHTS</div>
+      <h2 class="section-title">ENGINEERED FOR POWER RESEARCHERS</h2>
+      <p class="section-desc">Designed with high-density Neobrutalist aesthetics, zero tracking, and local-first
+        architecture.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon bg-yellow">💡</div>
+        <h3 class="feature-title">Context-First Captures</h3>
+        <p class="feature-desc">Never ask "Why did I bookmark this?" again. Every save requires your personal intent
+          note so future you understands immediately.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon bg-pink">“</div>
+        <h3 class="feature-title">Automatic Passage Quoting</h3>
+        <p class="feature-desc">Highlight any sentence on a page before clicking the hotkey. The extension automatically
+          extracts the exact quote with a one-click copy button.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon bg-cyan">🔒</div>
+        <h3 class="feature-title">100% Local-First &amp; Private</h3>
+        <p class="feature-desc">All records live in your browser's IndexedDB database. Works completely offline with
+          zero mandatory remote servers or third-party telemetry.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon bg-mint">☁️</div>
+        <h3 class="feature-title">Firebase Cloud Sync (Optional)</h3>
+        <p class="feature-desc">Sign in with Google in one click to sync saves across laptops and desktops via Google
+          Cloud Firestore with real-time bidirectional merge.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon bg-yellow">🔍</div>
+        <h3 class="feature-title">Instant Keyword Search</h3>
+        <p class="feature-desc">Lightning-fast substring search across page titles, full URLs, highlighted text, and
+          personal context notes with zero latency.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon bg-pink">📦</div>
+        <h3 class="feature-title">Zero Lock-In JSON Export</h3>
+        <p class="feature-desc">Export your entire archive into clean, versioned JSON anytime via pure browser Blob
+          generation with no remote permissions required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Creator Modal -->
+  <div id="contact-modal" class="modal-overlay hidden" role="dialog" aria-modal="true"
+    aria-labelledby="contact-modal-title">
+    <div class="modal-card contact-card">
+      <div class="modal-header">
+        <div class="badge badge-pink">📬 GET IN TOUCH</div>
+        <button id="close-contact-modal" class="close-modal-btn" aria-label="Close modal">✕</button>
+      </div>
+
+      <h3 id="contact-modal-title" class="modal-title">LET'S CONNECT ABOUT THIS PROJECT</h3>
+      <p class="modal-desc">
+        Have feedback, questions, feature requests, or want to collaborate? Send a message directly or connect on
+        socials!
+      </p>
+
+      <!-- Social Profile Buttons -->
+      <div class="social-links-container">
+        <span class="social-label">DIRECT SOCIALS:</span>
+        <div class="social-buttons">
+          <a href="https://github.com/piyush4955" target="_blank" rel="noopener noreferrer"
+            class="btn btn-secondary btn-social">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+            GitHub @piyush4955 ↗
+          </a>
+          <a href="https://www.instagram.com/randomstf26/?hl=en" target="_blank" rel="noopener noreferrer"
+            class="btn btn-secondary btn-social btn-instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+            Instagram @randomstf26 ↗
+          </a>
+        </div>
+      </div>
+
+      <form id="contact-form" class="contact-form">
+        <div class="form-group">
+          <label for="contact-name" class="form-label">YOUR NAME</label>
+          <input type="text" id="contact-name" class="form-input" placeholder="e.g. Alex Dev" required>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-email" class="form-label">YOUR EMAIL</label>
+          <input type="email" id="contact-email" class="form-input" placeholder="you@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-message" class="form-label">MESSAGE</label>
+          <textarea id="contact-message" class="form-textarea" rows="4"
+            placeholder="Tell me what you think about Web Content Saver..." required></textarea>
+        </div>
+
+        <div id="contact-status" class="alert-box success-alert hidden">
+          ✓ Thanks for reaching out! Message received.
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="cancel-contact-btn" class="btn btn-secondary">
+            CLOSE
+          </button>
+          <button type="submit" id="send-contact-btn" class="btn btn-primary">
+            SEND MESSAGE ✉
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="brand-link">
+          <div class="diamond-badge">◆</div>
+          <span class="brand-main">WEB SAVER</span>
+        </div>
+        <p class="footer-copy">
+          Designed with Obsidian Neobrutalism by <a href="https://github.com/piyush4955" target="_blank"
+            rel="noopener noreferrer" class="creator-link">@piyush4955</a>. Manifest V3 compliant, open-source friendly,
+          and local-first.
+        </p>
+      </div>
+
+      <div class="footer-right">
+        <a href="https://github.com/piyush4955" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <a href="https://www.instagram.com/randomstf26/?hl=en" target="_blank" rel="noopener noreferrer"
+          class="footer-link">Instagram</a>
+        <a href="web-content-saver.zip" download="web-content-saver.zip" class="footer-link">Download .ZIP</a>
+        <button id="footer-contact-btn" class="footer-link-btn" type="button">Contact Creator</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="landing.js"></script>
+</body>
+
+</html>

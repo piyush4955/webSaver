@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Saver - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Left Dark Neobrutalist Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <!-- Yellow Header Logo Banner -->
+        <div class="brand-banner">
+          <div class="diamond-icon">
+            <span>◆</span>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">WEB SAVER</span>
+            <span class="brand-sub">V1.0 ONLINE</span>
+          </div>
+        </div>
+
+        <div class="divider-dashed">------------------------</div>
+
+        <!-- Navigation -->
+        <nav class="nav-menu">
+          <button class="nav-item active" type="button">
+            <span class="nav-square">■</span> ALL SAVES
+          </button>
+        </nav>
+
+        <!-- Google Auth & Cloud Sync Box -->
+        <div class="auth-section">
+          <!-- Signed Out View -->
+          <div id="auth-signed-out" class="auth-card">
+            <div class="auth-status-bar">
+              <span class="status-dot dot-offline"></span>
+              <span class="status-text">LOCAL STORAGE</span>
+            </div>
+            <button id="google-login-btn" class="btn btn-google full-width" type="button" title="Sign in with Google to sync saves">
+              <svg width="14" height="14" viewBox="0 0 24 24" class="google-icon">
+                <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"/>
+                <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/>
+                <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12 0 14.8s.7 5.1 1.9 7.5l3.7-2.9z"/>
+                <path fill="#34A853" d="M12 23.5c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.4-6.4-5.2L1.9 16.5C3.7 20.2 7.5 23.5 12 23.5z"/>
+              </svg>
+              <span>SIGN IN</span>
+            </button>
+          </div>
+
+          <!-- Signed In View -->
+          <div id="auth-signed-in" class="auth-card hidden">
+            <div class="auth-status-bar">
+              <span class="status-dot dot-online"></span>
+              <span class="status-text">CLOUD SYNCED</span>
+            </div>
+            <div class="user-profile">
+              <div id="user-avatar" class="user-avatar">U</div>
+              <div class="user-info">
+                <div id="user-name" class="user-name">User</div>
+                <div id="user-email" class="user-email">user@gmail.com</div>
+              </div>
+            </div>
+            <div class="user-actions">
+              <button id="sync-now-btn" class="btn btn-secondary btn-small" type="button" title="Sync with Firestore">
+                ⟳ Sync
+              </button>
+              <button id="logout-btn" class="btn btn-danger btn-small" type="button" title="Sign out">
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Footer Stats & Actions -->
+      <div class="sidebar-footer">
+        <div class="stat-group">
+          <div class="stat-item">
+            <div id="stat-total-count" class="stat-value val-yellow">0</div>
+            <div class="stat-label">TOTAL</div>
+          </div>
+          <div class="stat-item">
+            <div id="stat-today-count" class="stat-value val-cyan">0</div>
+            <div class="stat-label">TODAY</div>
+          </div>
+        </div>
+
+        <button id="export-json-btn" class="btn btn-export full-width" title="Export all saves as a JSON file">
+          ↓ EXPORT JSON
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Search & Controls Bar -->
+      <header class="top-header">
+        <div class="search-bar-wrapper">
+          <div class="search-prefix">FIND &gt;</div>
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="Search by keyword in title, URL, quote, or context note..."
+            aria-label="Search saves"
+            autocomplete="off"
+          >
+          <button id="clear-search-btn" class="clear-btn hidden" title="Clear search" aria-label="Clear search">✕</button>
+        </div>
+
+        <div class="shortcut-pill" title="Extension shortcut to save page">
+          <span class="pill-label">SHORTCUT:</span>
+          <kbd class="kbd">Alt+Shift+S</kbd>
+        </div>
+      </header>
+
+      <!-- Toast Alert Banner -->
+      <div id="toast-banner" class="toast-banner hidden" role="alert"></div>
+
+      <!-- Saved Content Cards Grid -->
+      <section id="cards-container" class="cards-grid">
+        <!-- Cards dynamically injected by dashboard.js -->
+      </section>
+
+      <!-- Empty State -->
+      <section id="empty-state" class="state-card hidden">
+        <div class="state-icon">⚡</div>
+        <h2 class="state-title">NO SAVED CONTENT YET</h2>
+        <p class="state-desc">
+          Browse any webpage, highlight a quote (optional), and click the extension icon or press <kbd class="kbd">Alt+Shift+S</kbd> to save it with your context note.
+        </p>
+      </section>
+
+      <!-- No Search Results State -->
+      <section id="no-results-state" class="state-card hidden">
+        <div class="state-icon">🔍</div>
+        <h2 class="state-title">NO MATCHING RECORDS</h2>
+        <p class="state-desc">
+          No records matched your search: "<strong id="search-term-display"></strong>".
+        </p>
+        <button id="reset-search-btn" class="btn btn-secondary">
+          CLEAR SEARCH
+        </button>
+      </section>
+    </main>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="badge badge-pink">⚠️ CONFIRM ACTION</div>
+      </div>
+      <h3 id="modal-title" class="modal-title">DELETE THIS RECORD?</h3>
+      <p class="modal-desc">
+        This will permanently remove the record from local IndexedDB storage.
+      </p>
+      <div class="modal-actions">
+        <button id="cancel-delete-btn" class="btn btn-secondary">
+          CANCEL
+        </button>
+        <button id="confirm-delete-btn" class="btn btn-danger">
+          YES, DELETE RECORD
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

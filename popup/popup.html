@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save Content - Web Content Saver</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <div class="brand-badge">◆ WEB SAVER</div>
+        <span class="shortcut-tag" title="Keyboard Shortcut">Alt+Shift+S</span>
+      </div>
+      <button id="open-dashboard-btn" class="icon-btn" title="Open Dashboard" aria-label="Open Dashboard">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="9"></rect>
+          <rect x="14" y="3" width="7" height="5"></rect>
+          <rect x="14" y="12" width="7" height="9"></rect>
+          <rect x="3" y="16" width="7" height="5"></rect>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Unsupported Page Warning View -->
+    <div id="unsupported-view" class="view hidden">
+      <div class="alert-box warning-alert">
+        <div class="alert-title">⚠️ Protected Page</div>
+        <p class="alert-desc">Chrome security prevents extensions from capturing data on internal or system pages (<code id="unsupported-scheme">chrome://</code>).</p>
+      </div>
+      <p class="helper-text">Navigate to any standard web page (HTTP/HTTPS) and click the extension icon or press <strong>Alt+Shift+S</strong>.</p>
+      <button id="unsupported-open-dashboard" class="btn btn-secondary full-width">
+        Open Dashboard
+      </button>
+    </div>
+
+    <!-- Main Capture Form View -->
+    <form id="save-form" class="view">
+      <!-- Page Metadata Card -->
+      <div class="meta-card">
+        <div class="meta-row">
+          <span class="meta-label">PAGE</span>
+          <h2 id="page-title" class="page-title" title="Page title">Loading page info...</h2>
+        </div>
+        <div class="meta-row url-row">
+          <span class="url-badge" id="page-domain">domain.com</span>
+          <span class="page-url" id="page-url" title="Full URL">https://...</span>
+        </div>
+      </div>
+
+      <!-- Selection Snippet (Conditional) -->
+      <div id="selection-container" class="selection-box hidden">
+        <div class="selection-header">
+          <span class="badge badge-mint">" SELECTED QUOTE</span>
+          <button type="button" id="clear-selection-btn" class="text-btn" title="Ignore selected text">Discard quote</button>
+        </div>
+        <blockquote id="selected-text" class="quote-text"></blockquote>
+      </div>
+
+      <!-- Context Note Input (Required) -->
+      <div class="form-group">
+        <div class="label-row">
+          <label for="context-input" class="form-label">
+            WHY ARE YOU SAVING THIS? <span class="required-star">*</span>
+          </label>
+          <span id="char-hint" class="char-hint">Required note</span>
+        </div>
+        <textarea
+          id="context-input"
+          class="form-textarea"
+          rows="3"
+          placeholder="Write 1-2 lines on why this page or passage matters to you..."
+          required
+          autofocus
+        ></textarea>
+        <div id="validation-error" class="field-error hidden">Please write a brief reason for saving this page.</div>
+      </div>
+
+      <!-- Error Banner -->
+      <div id="error-banner" class="alert-box error-alert hidden">
+        <span id="error-message">Failed to save record.</span>
+      </div>
+
+      <!-- Actions -->
+      <div class="action-footer">
+        <button type="submit" id="save-btn" class="btn btn-primary">
+          <span class="btn-text">⚡ Save Content</span>
+        </button>
+      </div>
+    </form>
+
+    <!-- Success View -->
+    <div id="success-view" class="view hidden">
+      <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h3 class="success-title">Saved Locally!</h3>
+        <p class="success-subtitle">Record stored securely in IndexedDB.</p>
+        <div class="saved-preview" id="saved-preview-note"></div>
+      </div>
+      <div class="success-actions">
+        <button id="success-open-dashboard" class="btn btn-primary full-width">
+          View in Dashboard ↗
+        </button>
+        <button id="save-another-btn" class="btn btn-secondary full-width">
+          Save Another Note
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
