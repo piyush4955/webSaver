@@ -1,166 +1,183 @@
-⚡ Web Content Saver
+# ⚡ Web Content Saver
 
-Save what you found. Remember why it mattered.
+> **Save what you found. Remember why it mattered.**
 
-Web Content Saver is a Chrome Manifest V3 extension for saving useful web pages together with the exact text you found important and a short note explaining why you saved it.
+**Web Content Saver** is a Chrome Manifest V3 extension for saving useful web pages together with the exact text you found important and a short note explaining why you saved it.
 
-Instead of creating ordinary bookmarks that only remember where something was, Web Content Saver preserves the page + selected quote + personal context in a searchable dashboard.
+Instead of creating ordinary bookmarks that only remember where something was, Web Content Saver preserves the **page + selected quote + personal context** in a searchable dashboard.
 
-It uses IndexedDB for local-first storage and supports optional Google Sign-In + Firebase Firestore synchronization for cloud backup and multi-device access.
+It uses **IndexedDB** for local-first storage and supports optional **Google Sign-In + Firebase Firestore** synchronization for cloud backup and multi-device access.
 
-✨ What This Project Does
+---
+
+## ✨ What This Project Does
 
 The basic workflow is:
 
+```text
 🌐 Browse a Web Page
-       ↓
+        ↓
 ✂️ Select useful text (optional)
-       ↓
+        ↓
 ⚡ Open Web Content Saver
-       ↓
+        ↓
 📝 Add "Why did I save this?"
-       ↓
+        ↓
 💾 Save
-       ↓
+        ↓
 📊 Search & manage everything from Dashboard
-       ↓
+        ↓
 ☁️ Optional Google/Firebase cloud sync
+```
 
-Why not just use bookmarks?
+### Why not just use bookmarks?
 
 A bookmark tells you:
 
-"I saved this website."
+> "I saved this website."
 
 Web Content Saver tells you:
 
-"I saved this website because this specific information was useful to me."
+> "I saved this website because this specific information was useful to me."
 
-🚀 Features
+---
 
-1. ⚡ One-Click Page Capture
+# 🚀 Features
+
+## 1. ⚡ One-Click Page Capture
 
 The extension popup automatically captures:
 
-🌐 Current page URL
-
-🏷️ Page title
-
-✂️ Currently selected text
-
-📝 Your personal context/reason
+* 🌐 Current page URL
+* 🏷️ Page title
+* ✂️ Currently selected text
+* 📝 Your personal context/reason
 
 You only need to provide the reason for saving.
 
-2. ✂️ Selected Text / Quote Capture
+---
+
+## 2. ✂️ Selected Text / Quote Capture
 
 Select an important paragraph, definition, code snippet, explanation, or quote before opening the extension.
 
 The selected text is automatically captured and stored with the page.
 
-Example:
+### Example
 
+```text
 PAGE
-https://developer.chrome.com/...
+https://developer.chrome.com/
 
 CAPTURED QUOTE
 "Service workers terminate when idle..."
 
 WHY SAVED
-Useful pattern for understanding Manifest V3
-background workers.
+Useful pattern for understanding Manifest V3 background workers.
+```
 
 If nothing is selected, the save still works.
 
-3. 🧠 Context-First Saving
+---
 
-Every saved item requires a non-empty context note.
+## 3. 🧠 Context-First Saving
+
+Every saved item requires a **non-empty context note**.
 
 This prevents your collection from becoming a pile of links that you later forget the purpose of.
 
-Example:
+### Example
 
-❌ Bookmark:
+❌ **Bookmark**
+
+```text
 https://example.com/article
+```
 
-✅ Web Content Saver:
+✅ **Web Content Saver**
+
+```text
 https://example.com/article
 
 Quote:
 "IndexedDB provides a way to persist..."
 
 Why saved:
-"Useful for the local storage architecture
-of my Chrome extension."
+"Useful for the local storage architecture of my Chrome extension."
+```
 
-4. 📊 Searchable Dashboard
+---
+
+## 4. 📊 Searchable Dashboard
 
 The dashboard provides a central place to manage saved content.
 
 Search works across:
 
-Page title
-
-URL
-
-Selected text
-
-Context note
+* Page title
+* URL
+* Selected text
+* Context note
 
 Search is:
 
-🔎 Real-time
+* 🔎 Real-time
+* 🔤 Case-insensitive
+* ⚡ Local
+* 🚫 No server-side search required
 
-🔤 Case-insensitive
+---
 
-⚡ Local
-
-🚫 No server-side search required
-
-5. ✏️ Edit Saved Context
+## 5. ✏️ Edit Saved Context
 
 Forgot to explain something properly?
 
-You can edit the Why Saved note directly from the dashboard.
+You can edit the **Why Saved** note directly from the dashboard.
 
-The updated record receives a new updatedAt timestamp.
+The updated record receives a new `updatedAt` timestamp.
 
-6. 🗑️ Delete with Confirmation
+---
+
+## 6. 🗑️ Delete with Confirmation
 
 Saved records can be deleted from the dashboard.
 
 Deletion requires confirmation to reduce accidental removal.
 
-7. 📋 Copy Quote & Copy Link
+---
+
+## 7. 📋 Copy Quote & Copy Link
 
 Each saved card provides quick actions to:
 
-Copy the captured quote
-
-Copy the original page URL
+* Copy the captured quote
+* Copy the original page URL
 
 Useful when transferring research into notes, assignments, documentation, or projects.
 
-8. 📦 JSON Export
+---
+
+## 8. 📦 JSON Export
 
 Export your entire collection as a JSON file.
 
 The export contains:
 
-Export schema version
-
-Export timestamp
-
-All saved records
+* Export schema version
+* Export timestamp
+* All saved records
 
 This gives you a portable backup of your saved content.
 
-9. 🔐 Local-First Storage
+---
 
-The extension stores saved records in IndexedDB.
+## 9. 🔐 Local-First Storage
+
+The extension stores saved records in **IndexedDB**.
 
 The local record contains:
 
+```text
 id
 url
 title
@@ -168,57 +185,69 @@ selectedText
 context
 createdAt
 updatedAt
+```
 
 This means the extension can work locally without requiring a server for normal saving and searching.
 
-10. ☁️ Optional Google Sign-In + Firebase Sync
+---
+
+## 10. ☁️ Optional Google Sign-In + Firebase Sync
 
 The project also includes optional cloud functionality using:
 
-Google Sign-In
-
-Firebase Authentication
-
-Cloud Firestore
+* Google Sign-In
+* Firebase Authentication
+* Cloud Firestore
 
 When signed in:
 
+```text
 Local IndexedDB
-       ↕
+      ↕
 Firebase Firestore
+      │
+      └── Google Authentication
+```
 
-The project uses a local-first + cloud-sync model.
+The project uses a **local-first + cloud-sync model**.
 
 Cloud synchronization supports:
 
-Uploading local saves
-
-Pulling cloud saves
-
-Updating cloud records
-
-Deleting cloud records
-
-Syncing records when signing in on another device
+* Uploading local saves
+* Pulling cloud saves
+* Updating cloud records
+* Deleting cloud records
+* Syncing records when signing in on another device
 
 Firebase is an optional cloud layer. Local IndexedDB remains the primary storage layer.
 
-11. ⌨️ Keyboard Shortcut
+---
+
+## 11. ⌨️ Keyboard Shortcut
 
 The extension can be opened using:
 
-Windows/Linux:
+### Windows / Linux
+
+```text
 Alt + Shift + S
+```
 
-macOS:
+### macOS
+
+```text
 MacCtrl + Shift + S
+```
 
-12. 🛡️ Protected Page Detection
+---
+
+## 12. 🛡️ Protected Page Detection
 
 Chrome does not allow normal script access to certain browser-controlled pages.
 
 The extension detects unsupported pages such as:
 
+```text
 chrome://
 chrome-extension://
 devtools://
@@ -226,41 +255,42 @@ edge://
 about:
 view-source:
 Chrome Web Store
+```
 
 Instead of silently saving incomplete information, the extension shows a clear unsupported-page state.
 
-🎨 UI / Design
+---
 
-The project follows a distinctive Neobrutalist / Obsidian Brutalist visual style.
+# 🎨 UI / Design
 
-Design characteristics
+The project follows a distinctive **Neobrutalist / Obsidian Brutalist** visual style.
 
-🟨 High-contrast neon accents
+### Design characteristics
 
-🩷 Hot-pink action states
-
-🟦 Cyan telemetry elements
-
-⬛ Dark/obsidian dashboard
-
-▫️ Heavy borders
-
-💥 Solid drop shadows
-
-📐 Strong geometric layouts
-
-🖥️ Responsive dashboard cards
+* 🟨 High-contrast neon accents
+* 🩷 Hot-pink action states
+* 🟦 Cyan telemetry elements
+* ⬛ Dark/obsidian dashboard
+* ▫️ Heavy borders
+* 💥 Solid drop shadows
+* 📐 Strong geometric layouts
+* 🖥️ Responsive dashboard cards
 
 The same visual language is used across:
 
+```text
 Landing Page
-     ↓
+      ↓
 Extension Popup
-     ↓
+      ↓
 Dashboard
+```
 
-🖥️ Project Structure
+---
 
+# 🖥️ Project Structure
+
+```text
 bootcamp4/
 │
 ├── 📄 manifest.json
@@ -300,11 +330,15 @@ bootcamp4/
 ├── 📄 CHANGELOG.md
 ├── 📄 .gitignore
 └── 📄 vercel.json
+```
 
-🧩 Architecture
+---
+
+# 🧩 Architecture
 
 The extension is divided into three main UI layers and a background service worker.
 
+```text
                   WEB CONTENT SAVER
                          │
           ┌──────────────┼──────────────┐
@@ -316,293 +350,309 @@ The extension is divided into three main UI layers and a background service work
                 BACKGROUND SERVICE
                      WORKER
                          │
-                 ┌───────┴───────┐
-                 ↓               ↓
-             IndexedDB       Firebase
-             Local Store     Firestore
+                  ┌──────┴──────┐
+                  ↓             ↓
+              IndexedDB      Firebase
+              Local Store    Firestore
                                  │
-                          Google Authentication
+                                 ↓
+                        Google Authentication
+```
 
-background.js
+---
+
+## `background.js`
 
 Acts as the central data layer.
 
 It handles:
 
-IndexedDB initialization
+* IndexedDB initialization
+* Save operations
+* Fetch operations
+* Context updates
+* Delete operations
+* Authentication state
+* Firebase synchronization
+* Communication between popup/dashboard and storage
 
-Save operations
+---
 
-Fetch operations
-
-Context updates
-
-Delete operations
-
-Authentication state
-
-Firebase synchronization
-
-Communication between popup/dashboard and storage
-
-popup/
+## `popup/`
 
 Handles the quick-save workflow.
 
+```text
 Active Tab
-   ↓
+    ↓
 Capture URL + Title
-   ↓
+    ↓
 Capture Selection
-   ↓
+    ↓
 Enter Context
-   ↓
+    ↓
 Save
+```
 
-dashboard/
+---
+
+## `dashboard/`
 
 Handles collection management:
 
+```text
 Load records
-     ↓
+    ↓
 Display newest first
-     ↓
+    ↓
 Search
-     ↓
+    ↓
 Edit / Copy / Delete
-     ↓
+    ↓
 Export JSON
+```
 
-index.html
+---
+
+## `index.html`
 
 Provides the project's landing/home experience, including:
 
-Product explanation
+* Product explanation
+* Feature showcase
+* Interactive demo
+* Installation walkthrough
+* Contact modal
+* Preloader/boot sequence
 
-Feature showcase
+---
 
-Interactive demo
+# 🛠️ Tech Stack
 
-Installation walkthrough
-
-Contact modal
-
-Preloader/boot sequence
-
-🛠️ Tech Stack
-
-Technology
-
-Purpose
-
-JavaScript
-
-Application logic
-
-HTML5
-
-Extension and landing-page structure
-
-CSS3
-
-UI and Neobrutalist styling
-
-Chrome Extensions Manifest V3
-
-Browser extension platform
-
-Chrome Scripting API
-
-Reading selected page text
-
-Chrome Identity API
-
-Google authentication
-
-IndexedDB
-
-Local persistence
-
-Firebase Authentication
-
-Google/Firebase login
-
-Cloud Firestore
-
-Optional cloud synchronization
-
-Node.js
-
-Utility scripts
-
-JSON
-
-Manifest/config/export data
+| Technology                        | Purpose                              |
+| --------------------------------- | ------------------------------------ |
+| **JavaScript**                    | Application logic                    |
+| **HTML5**                         | Extension and landing-page structure |
+| **CSS3**                          | UI and Neobrutalist styling          |
+| **Chrome Extensions Manifest V3** | Browser extension platform           |
+| **Chrome Scripting API**          | Reading selected page text           |
+| **Chrome Identity API**           | Google authentication                |
+| **IndexedDB**                     | Local persistence                    |
+| **Firebase Authentication**       | Google/Firebase login                |
+| **Cloud Firestore**               | Optional cloud synchronization       |
+| **Node.js**                       | Utility scripts                      |
+| **JSON**                          | Manifest/config/export data          |
 
 No frontend framework is required for the core extension UI.
 
-📦 Installation
+---
 
-Option 1 — Install as an Unpacked Chrome Extension
+# 📦 Installation
 
-Step 1 — Download / clone the repository
+## Option 1 — Install as an Unpacked Chrome Extension
 
+### Step 1 — Download / clone the repository
+
+```bash
 git clone https://github.com/piyush4955/webSaver.git
 cd webSaver/bootcamp4
+```
 
-Step 2 — Open Chrome Extensions
+### Step 2 — Open Chrome Extensions
 
 Go to:
 
+```text
 chrome://extensions
+```
 
-Step 3 — Enable Developer Mode
+### Step 3 — Enable Developer Mode
 
 Turn on:
 
+```text
 Developer mode
+```
 
-Step 4 — Load the extension
+### Step 4 — Load the extension
 
 Click:
 
+```text
 Load unpacked
+```
 
 Select the project's:
 
+```text
 bootcamp4/
+```
 
 folder.
 
-Step 5 — Pin the extension
+### Step 5 — Pin the extension
 
 Open the Chrome Extensions menu and pin:
 
+```text
 Web Content Saver
+```
 
-▶️ How to Use
+---
 
-Save a Page
+# ▶️ How to Use
 
-1. Open any supported webpage
+## Save a Page
+
+### 1. Open any supported webpage
 
 For example:
 
-https://example.com
+```text
+https://example.com/
+```
 
-2. Select useful text
+### 2. Select useful text
 
 This is optional.
 
-Select → important paragraph / quote / code
+Select:
 
-3. Open Web Content Saver
+```text
+→ Important paragraph
+→ Quote
+→ Code
+```
+
+### 3. Open Web Content Saver
 
 Click the extension icon or use:
 
+```text
 Alt + Shift + S
+```
 
-4. Review captured information
+### 4. Review captured information
 
 The popup shows:
 
-Page title
-Page URL
-Selected text
+* Page title
+* Page URL
+* Selected text
 
-5. Add context
+### 5. Add context
 
 Write why you are saving it.
 
 Example:
 
+```text
 Important explanation of IndexedDB transactions.
 Useful for my browser extension project.
+```
 
-6. Click Save
+### 6. Click Save
 
 The record is stored locally.
 
-7. Open Dashboard
+### 7. Open Dashboard
 
 From the success screen, open the dashboard to manage your saved content.
 
-🔎 Searching Your Saves
+---
+
+# 🔎 Searching Your Saves
 
 Open the Dashboard and type into the search field.
 
 For example:
 
+```text
 firebase
+```
 
 The dashboard searches:
 
-Title
-URL
-Selected Text
-Context
+* Title
+* URL
+* Selected Text
+* Context
 
-Example:
+### Example
 
-Search: indexeddb
+Search:
 
+```text
+indexeddb
+```
+
+Results can include:
+
+```text
 ✓ "IndexedDB storage patterns"
 ✓ URL containing indexeddb
 ✓ Quote mentioning IndexedDB
 ✓ Context mentioning IndexedDB
+```
 
-☁️ Firebase Setup
+---
+
+# ☁️ Firebase Setup
 
 Firebase cloud sync is available as an optional feature.
 
 Detailed instructions are provided here:
 
+```text
 docs/FIREBASE_SETUP.md
+```
 
 The setup covers:
 
-Creating a Firebase project
+* Creating a Firebase project
+* Registering the web app
+* Configuring Firebase credentials
+* Enabling Google Authentication
+* Creating Firestore
+* Applying Firestore security rules
+* Using local-first + cloud synchronization
+* Firestore data model
 
-Registering the web app
+### Firestore Data Model
 
-Configuring Firebase credentials
-
-Enabling Google Authentication
-
-Creating Firestore
-
-Applying Firestore security rules
-
-Using local-first + cloud synchronization
-
-Firestore data model
-
+```text
 users/
 └── {userId}/
     └── saves/
         ├── {recordId}
         ├── {recordId}
         └── ...
+```
 
 Each user's saves are isolated using their Firebase user ID.
 
-📤 JSON Export
+---
+
+# 📤 JSON Export
 
 The Dashboard includes:
 
+```text
 ↓ EXPORT JSON
+```
 
 The generated export is designed to be portable and contains an export version, timestamp, and saved records.
 
-Example structure:
+### Example Structure
 
+```json
 {
   "schemaVersion": 1,
   "exportedAt": "2026-09-26T00:00:00.000Z",
   "records": [
     {
       "id": "...",
-      "url": "https://example.com",
+      "url": "https://example.com/",
       "title": "Example",
       "selectedText": "Important text...",
       "context": "Why I saved this...",
@@ -611,238 +661,227 @@ Example structure:
     }
   ]
 }
+```
 
-🔒 Privacy Model
+---
 
-The extension is designed around a local-first architecture.
+# 🔒 Privacy Model
 
-Without cloud sign-in
+The extension is designed around a **local-first architecture**.
 
+## Without Cloud Sign-In
+
+```text
 Web Page
-   ↓
+    ↓
 Extension
-   ↓
+    ↓
 IndexedDB
-   ↓
+    ↓
 Dashboard
+```
 
-No server is required for saving, searching, editing, deleting, or exporting local records.
+No server is required for:
 
-With Google/Firebase sign-in
+* Saving
+* Searching
+* Editing
+* Deleting
+* Exporting local records
 
+---
+
+## With Google/Firebase Sign-In
+
+```text
 Web Page
-   ↓
+    ↓
 Extension
-   ↓
+    ↓
 IndexedDB ─────────→ Firestore
-   ↑                    │
-   └────────────────────┘
-        Sync
+    ↑                   ↓
+    └───────────────────┘
+            Sync
+```
 
 Only the cloud-sync functionality uses Firebase network services.
 
-📚 Documentation
+---
 
-The repository includes dedicated project documentation:
+# 📚 Documentation
 
-Product Requirements
+The repository includes dedicated project documentation.
 
+## Product Requirements
+
+```text
 docs/PRD.md
+```
 
 Defines:
 
-Product problem
+* Product problem
+* Target user
+* Goals
+* User flow
+* V1 scope
+* Out-of-scope features
+* Product principles
+* Success criteria
+* Constraints and risks
 
-Target user
+---
 
-Goals
+## Detailed Requirements
 
-User flow
-
-V1 scope
-
-Out-of-scope features
-
-Product principles
-
-Success criteria
-
-Constraints and risks
-
-Detailed Requirements
-
+```text
 docs/REQUIREMENTS.md
+```
 
 Defines:
 
-Runtime requirements
+* Runtime requirements
+* Chrome permissions
+* Functional requirements
+* Data model
+* Search requirements
+* UX requirements
+* Architecture requirements
+* Acceptance checklist
 
-Chrome permissions
+---
 
-Functional requirements
+## Firebase Setup
 
-Data model
-
-Search requirements
-
-UX requirements
-
-Architecture requirements
-
-Acceptance checklist
-
-Firebase Setup
-
+```text
 docs/FIREBASE_SETUP.md
+```
 
 Contains the Google Authentication and Firestore configuration guide.
 
-🧪 Verification Checklist
+---
+
+# 🧪 Verification Checklist
 
 After loading the extension, test the following:
 
-Save a page with selected text
+* [ ] Save a page with selected text
+* [ ] Save a page without selected text
+* [ ] Verify blank context cannot be saved
+* [ ] Verify saved data appears in Dashboard
+* [ ] Search by title
+* [ ] Search by URL
+* [ ] Search by selected text
+* [ ] Search by context
+* [ ] Verify case-insensitive search
+* [ ] Edit a context note
+* [ ] Delete a save
+* [ ] Confirm deletion behavior
+* [ ] Copy a quote
+* [ ] Copy a URL
+* [ ] Export JSON
+* [ ] Test an unsupported Chrome page
+* [ ] Test the keyboard shortcut
+* [ ] Test Google Sign-In if Firebase is configured
+* [ ] Test cloud synchronization if Firebase is configured
 
-Save a page without selected text
+---
 
-Verify blank context cannot be saved
-
-Verify saved data appears in Dashboard
-
-Search by title
-
-Search by URL
-
-Search by selected text
-
-Search by context
-
-Verify case-insensitive search
-
-Edit a context note
-
-Delete a save
-
-Confirm deletion behavior
-
-Copy a quote
-
-Copy a URL
-
-Export JSON
-
-Test an unsupported Chrome page
-
-Test the keyboard shortcut
-
-Test Google Sign-In if Firebase is configured
-
-Test cloud synchronization if Firebase is configured
-
-📁 Useful Scripts
+# 📁 Useful Scripts
 
 The repository contains Node.js utility scripts.
 
-Generate extension ZIP
+## Generate Extension ZIP
 
+```bash
 node build_zip.js
+```
 
 This creates:
 
+```text
 web-content-saver.zip
+```
 
 containing the files required for the extension bundle.
 
-Generate icons
+---
 
+## Generate Icons
+
+```bash
 node generate_icons.js
+```
 
 The project also includes generated extension icons under:
 
+```text
 icons/
+```
 
-🗺️ Current Scope
+---
 
-✅ Implemented
+# 🗺️ Current Scope
 
-Chrome Manifest V3 extension
+## ✅ Implemented
 
-Page URL capture
+* Chrome Manifest V3 extension
+* Page URL capture
+* Page title capture
+* Selected text capture
+* Required context note
+* Local IndexedDB persistence
+* Searchable dashboard
+* Context editing
+* Delete confirmation
+* Copy quote
+* Copy URL
+* JSON export
+* Unsupported-page handling
+* Keyboard shortcut
+* Neobrutalist UI
+* Landing page
+* Interactive landing-page demo
+* Google authentication integration
+* Firebase Firestore synchronization
+* Local-first cloud sync architecture
+* Project documentation
 
-Page title capture
+---
 
-Selected text capture
-
-Required context note
-
-Local IndexedDB persistence
-
-Searchable dashboard
-
-Context editing
-
-Delete confirmation
-
-Copy quote
-
-Copy URL
-
-JSON export
-
-Unsupported-page handling
-
-Keyboard shortcut
-
-Neobrutalist UI
-
-Landing page
-
-Interactive landing-page demo
-
-Google authentication integration
-
-Firebase Firestore synchronization
-
-Local-first cloud sync architecture
-
-Project documentation
-
-🔮 Possible Future Improvements
+# 🔮 Possible Future Improvements
 
 Potential extensions to the current architecture include:
 
-🏷️ Tags and categories
+* 🏷️ Tags and categories
+* 📁 Folders / collections
+* 🔄 Importing JSON backups
+* 🧠 AI-generated summaries
+* 🤖 AI-powered semantic search
+* 📱 Mobile companion application
+* 🌐 Support for additional browsers
+* 🔗 Sharing saved collections
+* 📈 Usage analytics
+* 📝 Richer note editing
 
-📁 Folders / collections
+---
 
-🔄 Importing JSON backups
-
-🧠 AI-generated summaries
-
-🤖 AI-powered semantic search
-
-📱 Mobile companion application
-
-🌐 Support for additional browsers
-
-🔗 Sharing saved collections
-
-📈 Usage analytics
-
-📝 Richer note editing
-
-📜 Version
+# 📜 Version
 
 Current project version:
 
+```text
 1.0.0
+```
 
-See CHANGELOG.md for the implementation history and user-visible changes.
+See `CHANGELOG.md` for the implementation history and user-visible changes.
 
-👨‍💻 Project
+---
 
-Web Content Saver
+# 👨‍💻 Project
+
+## Web Content Saver
 
 A lightweight, context-first way to turn useful web discoveries into a searchable personal knowledge collection.
 
-Don't just save the link. Save the reason.
+> **Don't just save the link. Save the reason.**
